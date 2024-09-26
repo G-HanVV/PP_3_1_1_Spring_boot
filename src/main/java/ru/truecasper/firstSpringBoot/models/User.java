@@ -1,6 +1,9 @@
 package ru.truecasper.firstSpringBoot.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -10,19 +13,22 @@ public class User {
     @Column(name = "id")
     private int id;
 
+    @NotEmpty(message = "Name can not be empty")
     @Column(name = "name")
     private String name;
 
+    @NotEmpty(message = "Surname can not be empty")
     @Column(name = "surname")
     private String surname;
 
+    @Min(value = 18, message = "Age must be greater than 18")
     @Column(name = "age")
-    private String age;
+    private int age;
 
     public User() {
     }
 
-    public User(String name, String surname, String age) {
+    public User(String name, String surname, int age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -58,11 +64,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }
